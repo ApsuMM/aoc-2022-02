@@ -15,56 +15,47 @@ public class Main {
 		String line = null;
 		while ((line = reader.readLine()) != null)
 		{
-
-			RoShamBo opponent = null;
+			Integer opponent = null;
 			switch (line.charAt(0))
 			{
-			case 'A':	opponent = RoShamBo.Rock;
+			case 'A':	opponent = 1;
 						break;
-			case 'B':	opponent = RoShamBo.Paper;
+			case 'B':	opponent = 2;
 						break;
-			case 'C':	opponent = RoShamBo.Scissors;
+			case 'C':	opponent = 3;
 						break;
 			}
 			
-			RoShamBo self = null;
 			switch (line.charAt(2))
 			{
-			case 'X':	self = RoShamBo.Rock;
-						total += 1;
+			case 'X':	total += Main.lose(opponent);
 						break;
-			case 'Y':	self = RoShamBo.Paper;
-						total += 2;
+			case 'Y':	total += opponent + 3;
 						break;
-			case 'Z':	self = RoShamBo.Scissors;
-						total += 3;
+			case 'Z':	total += Main.win(opponent) + 6;
 						break;
-			}
-			
-			if (opponent == self)
-			{
-				total += 3;
-				continue;
-			}
-			
-			if (opponent == RoShamBo.Rock && self == RoShamBo.Paper)
-			{
-				total += 6;
-				continue;
-			}
-			
-			if (opponent == RoShamBo.Paper && self == RoShamBo.Scissors)
-			{
-				total += 6;
-				continue;
-			}
-			
-			if (opponent == RoShamBo.Scissors && self == RoShamBo.Rock)
-			{
-				total += 6;
-				continue;
 			}
 		}
 		System.out.println(total);
+	}
+	
+	public static int win(int i)
+	{
+		i++;
+		if (i > 3)
+		{
+			i = 1;
+		}
+		return i;
+	}
+	
+	public static int lose(int i)
+	{
+		i--;
+		if (i < 1)
+		{
+			i = 3;
+		}
+		return i;
 	}
 }
